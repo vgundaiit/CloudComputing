@@ -1,0 +1,42 @@
+sudo ./gensort -a 10737418 input1gb
+
+sudo time -p sort --buffer-size=8G 1gb --parallel=24 -o sort1gb24.txt
+$ sudo iostat -m sda
+Linux 4.15.0-91-generic (team-5-01)     04/12/20        _x86_64_        (48 CPU)
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.98    0.00    0.18    0.18    0.00   98.66
+
+Device             tps    MB_read/s    MB_wrtn/s    MB_read    MB_wrtn
+sda             185.61        13.51        31.27    1246725    2886722
+
+$ sudo time -p sort --buffer-size=8G input1gb --parallel=24 -o sort1gb24.txt
+real 202.33
+user 345.09
+sys 89.84
+
+cc@team-5-01:/sort$ sudo /gensort/64/valsort sort1
+sort16gb48.txt  sort1gb24.txt
+cc@team-5-01:/sort$ sudo /gensort/64/valsort sort1gb24.txt
+Records: 10737418
+Checksum: 51e88faefe7b34
+Duplicate keys: 0
+SUCCESS - all records are in order
+
+cc@team-5-01:/sort$ sudo iostat -m sda
+Linux 4.15.0-91-generic (team-5-01)     04/12/20        _x86_64_        (48 CPU)
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.98    0.00    0.18    0.18    0.00   98.66
+
+Device             tps    MB_read/s    MB_wrtn/s    MB_read    MB_wrtn
+sda             185.41        13.50        31.23    1248773    2887751
+
+
+
+
+
+cc@team-5-01:/sort$ sudo sort --buffer-size=8G input1gb --parallel=24 -o sort1gb24.txt
+
+
+sudo sort --buffer-size=8G 1gb --parallel=24 -o sort1gb24.txt

@@ -1,0 +1,31 @@
+$ sudo iostat -m sda
+Linux 4.15.0-91-generic (team-5-01)     04/12/20        _x86_64_        (48 CPU)
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.98    0.00    0.18    0.18    0.00   98.66
+
+Device             tps    MB_read/s    MB_wrtn/s    MB_read    MB_wrtn
+sda             185.33        13.30        31.41    1205746    2847715
+
+$ sudo time -p sort --buffer-size=8G input16gb --parallel=2 -o sort16gb2.txt
+real 202.33
+user 345.09
+sys 89.84
+
+$ sudo /gensort/64/valsort sort16gb48.txt
+Records: 171798691
+Checksum: 51ea5e584e0bcd3
+Duplicate keys: 0
+SUCCESS - all records are in order
+
+$ sudo iostat -m sda
+Linux 4.15.0-91-generic (team-5-01)     04/12/20        _x86_64_        (48 CPU)
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.99    0.00    0.19    0.18    0.00   98.65
+
+Device             tps    MB_read/s    MB_wrtn/s    MB_read    MB_wrtn
+sda             187.60        13.61        31.66    1238516    2880068
+
+
+$ sudo  sort --buffer-size=8G input16gb --parallel=48 -o sort16gb48.txt

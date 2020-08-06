@@ -1,0 +1,10 @@
+Total Read time : 82.0164
+Total Write time : 132.475
+Total Sort time : 588.709
+Total Merge time : 45.5999
+file size is 17179869100
+Read speed : 399.53 MBPS
+Write speed : 247.352 MBPS
+Sort speed : 27.8304 MBPS
+Main routine time is: 821.088
+MySort speed : 19.954 MBPS

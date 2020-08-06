@@ -1,0 +1,33 @@
+sudo ./gensort -a 687194767 input64gb
+
+sudo iostat -m sda
+Linux 4.15.0-91-generic (team-5-01)     04/12/20        _x86_64_        (48 CPU)
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.99    0.00    0.19    0.18    0.00   98.65
+
+Device             tps    MB_read/s    MB_wrtn/s    MB_read    MB_wrtn
+sda             187.54        13.83        31.43    1286719    2925529
+
+$ sudo time -p sort --buffer-size=8G input64gb --parallel=24 -o sort64gb24.txt
+creal 1169.03
+user 2876.01
+sys 334.75
+
+$ sudo /gensort/64/valsort sort64gb48.txt
+Records: 687194767
+Checksum: 147ad98a21f6e7a7
+Duplicate keys: 0
+SUCCESS - all records are in order
+
+$ sudo iostat -m sda
+Linux 4.15.0-91-generic (team-5-01)     04/12/20        _x86_64_        (48 CPU)
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           1.01    0.00    0.19    0.19    0.00   98.61
+
+Device             tps    MB_read/s    MB_wrtn/s    MB_read    MB_wrtn
+sda             197.26        14.98        32.70    1418747    3097139
+
+
+sudo sort --buffer-size=8G input64gb --parallel=48 -o sort64gb48.txt
